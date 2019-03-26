@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>RandomSolutions.ExcelConverter</id>
+    <title>RandomSolutions.ExcelConverter</title>
+    <version>1.0.0</version>
+    <authors>Leonid Salavatov</authors>
+    <owners>Leonid Salavatov</owners>   
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Convert Excel to C# object</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2019 (c) Leonid Salavatov</copyright>
+    <tags>excel xlsx xls convert parse map mapping</tags>
+    <projectUrl>https://github.com/mustaddon/ExcelConverter</projectUrl>
+    <repository type="git" url="https://github.com/mustaddon/ExcelConverter" />
+    <dependencies>
+	  <group targetFramework="net45">
+	    <dependency id="EPPlus" version="4.5.3.1" />
+	  </group>
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="ExcelConverter\bin\Release\RandomSolutions.ExcelConverter.dll" target="lib\net45\RandomSolutions.ExcelConverter.dll" />
+  </files>  
+</package>
