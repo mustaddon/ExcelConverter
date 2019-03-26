@@ -21,7 +21,7 @@ public class SampleChild
 {
     public string Prop1 { get; set; }
     public string Prop2 { get; set; }
-    public string Prop3 { get; set; }
+    public string[] Prop3 { get; set; }
 }
 ```
 
@@ -81,6 +81,7 @@ var map = new ExcelConvertMap
                 new ExcelConvertMap {
                     Name = "Prop3",
                     Col = ctx => findChildCol(ctx, "prop#3"),
+					Value = ctx => ctx.Value?.ToString().Split(','),
                 },
             },
         },

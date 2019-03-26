@@ -36,7 +36,7 @@ namespace RandomSolutions
 
         static object _getValue(ExcelPackage excel, ExcelConvertMap map, Type type, ExcelConvertContext parent = null)
         {
-            var isEnumerable = _isEnumerable(type);
+            var isEnumerable = map.Value == null && _isEnumerable(type);
             var itemType = !isEnumerable ? type : _getElementType(type);
             var itemPropInfos = itemType.GetProperties().Where(x => x.CanWrite).ToDictionary(x => x.Name, x => x);
             var count = isEnumerable && map.Break != null ? int.MaxValue : 1;

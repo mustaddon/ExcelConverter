@@ -58,6 +58,7 @@ namespace NestedArray
                             new ExcelConvertMap {
                                 Name = "Prop3",
                                 Col = ctx => FindChildCol(ctx, "prop#3"),
+                                Value = ctx => ctx.Value?.ToString().Split(','),
                             },
                         },
                     },
@@ -69,7 +70,7 @@ namespace NestedArray
                 Console.WriteLine($"{item.Id}\t{item.Title}\t{item.User.Login}\t{item.User.Name}");
 
                 foreach(var child in item.Childs)
-                    Console.WriteLine($"\t{child.Prop1}\t{child.Prop2}\t{child.Prop3}");
+                    Console.WriteLine($"\t{child.Prop1}\t{child.Prop2}\t{string.Join(";",child.Prop3)}");
 
                 Console.WriteLine();
             }
