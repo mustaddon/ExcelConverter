@@ -1,4 +1,4 @@
-# Convert Excel into simple C# object
+# Convert Excel to simple C# object
 
 ![](/Samples/SimpleObject/sample.png)
 
