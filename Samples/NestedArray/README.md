@@ -81,7 +81,7 @@ var map = new ExcelConvertMap
                 new ExcelConvertMap {
                     Name = "Prop3",
                     Col = ctx => findChildCol(ctx, "prop#3"),
-					Value = ctx => ctx.Value?.ToString().Split(','),
+		    Value = ctx => ctx.Value?.ToString().Split(','),
                 },
             },
         },
