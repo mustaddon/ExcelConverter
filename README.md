@@ -1,5 +1,5 @@
 # ExcelConverter
-[![net45](https://img.shields.io/badge/net-45-brightgreen.svg)](https://img.shields.io/badge/net-45-brightgreen.svg)
+[![NuGet version](https://badge.fury.io/nu/RandomSolutions.ExcelConverter.svg)](http://badge.fury.io/nu/RandomSolutions.ExcelConverter)
 
 ## Samples
 - [Convert Excel to simple object](Samples/SimpleObject#convert-excel-to-simple-c-object)
