@@ -3,7 +3,7 @@
 ![](/Samples/NestedArray/sample.png)
 
 ```C#
-class SampleObject
+public class SampleObject
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -11,7 +11,7 @@ class SampleObject
     public SampleChild[] Childs { get; set; }
 }
 
-class SampleUser
+public class SampleUser
 {
     public string Login { get; set; }
     public string Name { get; set; }
