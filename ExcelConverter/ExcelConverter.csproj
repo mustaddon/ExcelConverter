@@ -13,12 +13,16 @@
     <RootNamespace>RandomSolutions</RootNamespace>
     <AssemblyName>RandomSolutions.ExcelConverter</AssemblyName>
     <Product>RandomSolutions.ExcelConverter</Product>
+    <Title>RandomSolutions.ExcelConverter</Title>
     <Description>Convert Excel to C# object</Description>
     <PackageTags>excel xlsx xls convert parse map mapping</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mustaddon/ExcelConverter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mustaddon/ExcelConverter</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <NeutralLanguage />
 	<PackageReleaseNotes>1.0.3
 * .NET Core support
 </PackageReleaseNotes>
