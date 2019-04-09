@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ExcelConverter\ExcelConverter.csproj">
-      <Project>{b8e94b91-b323-454a-8ac6-f0c2779f76cc}</Project>
+      <Project>{df603677-f82e-481e-b2e6-c2d409be9ada}</Project>
       <Name>ExcelConverter</Name>
     </ProjectReference>
   </ItemGroup>

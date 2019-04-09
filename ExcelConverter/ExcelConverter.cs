@@ -95,7 +95,7 @@ namespace RandomSolutions
                         {
                             var pi = itemPropInfos[propMap.Name];
                             var val = _getValue(excel, propMap, pi.PropertyType, ctx);
-                            pi.SetValue(item, val);
+                            pi.SetValue(item, val, null);
                         }
                 }
 
