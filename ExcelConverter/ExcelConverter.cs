@@ -9,6 +9,16 @@ namespace RandomSolutions
 {
     public class ExcelConverter
     {
+        public static T ConvertTo<T>(Action<ExcelConvertMapBuilder> mapBuilder, string excelPath, string password = null)
+        {
+            return (T)ConvertTo(typeof(T), mapBuilder, excelPath, password);
+        }
+
+        public static T ConvertTo<T>(Action<ExcelConvertMapBuilder> mapBuilder, Stream excelStream, string password = null)
+        {
+            return (T)ConvertTo(typeof(T), mapBuilder, excelStream, password);
+        }
+
         public static T ConvertTo<T>(ExcelConvertMap map, string excelPath, string password = null)
         {
             return (T)ConvertTo(typeof(T), map, excelPath, password);
@@ -17,6 +27,21 @@ namespace RandomSolutions
         public static T ConvertTo<T>(ExcelConvertMap map, Stream excelStream, string password = null)
         {
             return (T)ConvertTo(typeof(T), map, excelStream, password);
+        }
+
+
+        public static object ConvertTo(Type type, Action<ExcelConvertMapBuilder> mapBuilder, string excelPath, string password = null)
+        {
+            var builder = new ExcelConvertMapBuilder();
+            mapBuilder?.Invoke(builder);
+            return ConvertTo(type, builder.Build(), excelPath, password);
+        }
+
+        public static object ConvertTo(Type type, Action<ExcelConvertMapBuilder> mapBuilder, Stream excelStream, string password = null)
+        {
+            var builder = new ExcelConvertMapBuilder();
+            mapBuilder?.Invoke(builder);
+            return ConvertTo(type, builder.Build(), excelStream, password);
         }
 
         public static object ConvertTo(Type type, ExcelConvertMap map, string excelPath, string password = null)
@@ -33,6 +58,7 @@ namespace RandomSolutions
                 return _getValue(excel, map, type);
             }
         }
+
 
         static object _getValue(ExcelPackage excel, ExcelConvertMap map, Type type, ExcelConvertContext parent = null)
         {
@@ -81,7 +107,7 @@ namespace RandomSolutions
 
                 object item = null;
 
-                if (map.Props == null)
+                if (map.Value != null || map.Props?.Any() != true)
                 {
                     ctx.Value = map.Value != null ? map.Value(ctx) : _getCellValueSafe(cell, itemType);
                     item = ctx.Value;
@@ -156,5 +182,5 @@ namespace RandomSolutions
             return typeof(Enumerable).GetMethod(to).MakeGenericMethod(elementType).Invoke(enumerable, new[] { enumerable });
         }
     }
-    
+
 }

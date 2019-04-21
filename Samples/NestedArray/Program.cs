@@ -11,66 +11,42 @@ namespace NestedArray
     {
         static void Main(string[] args)
         {
-            var result = ExcelConverter.ConvertTo<SampleObject[]>(new ExcelConvertMap
-            {
-                Sheet = ctx => 1,
-                Row = ctx => 2,
-                Col = ctx => 2 + 4 * ctx.Index,
-                Break = ctx => ctx.Value == null,
-                Props = new[] {
-                    new ExcelConvertMap {
-                        Name = "Id",
-                        Row = ctx => FindRow(ctx, "id"),
-                        Col = ctx => ctx.Parent.Col + 1,
-                    },
-                    new ExcelConvertMap {
-                        Name = "Title",
-                        Row = ctx => FindRow(ctx, "title"),
-                        Col = ctx => ctx.Parent.Col + 1,
-                    },
-                    new ExcelConvertMap {
-                        Name = "User",
-                        Row = ctx => FindRow(ctx, "user"),
-                        Props = new []{
-                            new ExcelConvertMap {
-                                Name = "Login",
-                                Col = ctx => ctx.Parent.Col + 1,
-                            },
-                            new ExcelConvertMap {
-                                Name = "Name",
-                                Col = ctx => ctx.Parent.Col + 2,
-                            },
-                        },
-                    },
-                    new ExcelConvertMap {
-                        Name = "Childs",
-                        Row = ctx => ctx.Parent.Row + 4 + ctx.Index,
-                        Break = ctx => ctx.Value == null,
-                        Props = new []{
-                            new ExcelConvertMap {
-                                Name = "Prop1",
-                                Col = ctx => FindChildCol(ctx, "prop#1"),
-                            },
-                            new ExcelConvertMap {
-                                Name = "Prop2",
-                                Col = ctx => FindChildCol(ctx, "prop#2"),
-                            },
-                            new ExcelConvertMap {
-                                Name = "Prop3",
-                                Col = ctx => FindChildCol(ctx, "prop#3"),
-                                Value = ctx => ctx.Value?.ToString().Split(','),
-                            },
-                        },
-                    },
-                }
-            }, @"sample.xlsx");
+            var result = ExcelConverter.ConvertTo<SampleObject[]>(a => a
+                .Sheet(x => 1)
+                .Row(x => 2)
+                .Col(x => 2 + 4 * x.Index)
+                .Break(x => x.Value == null)
+                .Prop("Id", b => b
+                    .Row(x => FindRow(x, "id"))
+                    .Col(x => x.Parent.Col + 1))
+                .Prop("Title", b => b
+                    .Row(x => FindRow(x, "title"))
+                    .Col(x => x.Parent.Col + 1))
+                .Prop("User", b => b
+                    .Row(x => FindRow(x, "user"))
+                    .Prop("Login", c => c
+                        .Col(x => x.Parent.Col + 1))
+                    .Prop("Name", c => c
+                        .Col(x => x.Parent.Col + 2)))
+                .Prop("Childs", b => b
+                    .Row(x => x.Parent.Row + 4 + x.Index)
+                    .Break(x => x.Value == null)
+                    .Prop("Prop1", c => c
+                        .Col(x => FindChildCol(x, "prop#1")))
+                    .Prop("Prop2", c => c
+                        .Col(x => FindChildCol(x, "prop#2")))
+                    .Prop("Prop3", c => c
+                        .Col(x => FindChildCol(x, "prop#3"))
+                        .Value(x => x.Value?.ToString().Split(',')))
+                )
+            , @"sample.xlsx");
 
             foreach (var item in result)
             {
                 Console.WriteLine($"{item.Id}\t{item.Title}\t{item.User.Login}\t{item.User.Name}");
 
-                foreach(var child in item.Childs)
-                    Console.WriteLine($"\t{child.Prop1}\t{child.Prop2}\t{string.Join(";",child.Prop3)}");
+                foreach (var child in item.Childs)
+                    Console.WriteLine($"\t{child.Prop1}\t{child.Prop2}\t{string.Join(";", child.Prop3)}");
 
                 Console.WriteLine();
             }
@@ -87,8 +63,8 @@ namespace NestedArray
 
         static int FindChildCol(ExcelConvertContext ctx, string title)
         {
-            return ctx.FindCol(ctx.Sheet, ctx.Parent.Parent.Row + 3, 
-                (i, v) => v?.ToString() == title, 
+            return ctx.FindCol(ctx.Sheet, ctx.Parent.Parent.Row + 3,
+                (i, v) => v?.ToString() == title,
                 ctx.Parent.Col, ctx.Parent.Col + 3);
         }
     }
