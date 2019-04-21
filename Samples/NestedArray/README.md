@@ -34,7 +34,7 @@ var findChildCol = new Func<ExcelConvertContext, string, int>((ctx, title)
     => ctx.FindCol(ctx.Sheet, ctx.Parent.Parent.Row + 3, 
     (i, val) => val?.ToString() == title, ctx.Parent.Col, ctx.Parent.Col + 3));
 
-var result = ExcelConverter.ConvertTo<SampleObject[]>(a => a
+ var result = ExcelConverter.ConvertTo<SampleObject[]>(a => a
     .Sheet(x => 1)
     .Row(x => 2)
     .Col(x => 2 + 4 * x.Index)
@@ -48,19 +48,19 @@ var result = ExcelConverter.ConvertTo<SampleObject[]>(a => a
     .Prop("User", b => b
         .Row(x => findRow(x, "user"))
         .Prop("Login", c => c
-    	.Col(x => x.Parent.Col + 1))
+            .Col(x => x.Parent.Col + 1))
         .Prop("Name", c => c
-    	.Col(x => x.Parent.Col + 2)))
+            .Col(x => x.Parent.Col + 2)))
     .Prop("Childs", b => b
         .Row(x => x.Parent.Row + 4 + x.Index)
         .Break(x => x.Value == null)
         .Prop("Prop1", c => c
-    	.Col(x => findChildCol(x, "prop#1")))
+            .Col(x => findChildCol(x, "prop#1")))
         .Prop("Prop2", c => c
-    	.Col(x => findChildCol(x, "prop#2")))
+            .Col(x => findChildCol(x, "prop#2")))
         .Prop("Prop3", c => c
-    	.Col(x => findChildCol(x, "prop#3"))
-    	.Value(x => x.Value?.ToString().Split(',')))
-)
+            .Col(x => findChildCol(x, "prop#3"))
+            .Value(x => x.Value?.ToString().Split(',')))
+    )
 , @"sample.xlsx");
 ```
