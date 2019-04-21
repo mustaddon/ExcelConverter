@@ -12,27 +12,16 @@ public class SampleObject
 ```
 
 ```C#
-var map = new ExcelConvertMap
-{
-    Sheet = ctx => 1,
-    Props = new[] {
-        new ExcelConvertMap {
-            Name = "Id",
-            Row = ctx => 2,
-            Col = ctx => 3,
-        },
-        new ExcelConvertMap {
-            Name = "Title",
-            Row = ctx => 3,
-            Col = ctx => 3,
-        },
-        new ExcelConvertMap {
-            Name = "Description",
-            Row = ctx => 4,
-            Col = ctx => 3,
-        },
-    }
-};
-
-var result = ExcelConverter.ConvertTo<SampleObject>(map, @"sample.xlsx");
+var result = ExcelConverter.ConvertTo<SampleObject>(a => a
+    .Sheet(x => 1)
+    .Prop("Id", b => b
+        .Row(x => 2)
+        .Col(x => 3))
+    .Prop("Title", b => b
+        .Row(x => 3)
+        .Col(x => 3))
+    .Prop("Description", b => b
+        .Row(x => 4)
+        .Col(x => 3))
+, @"sample.xlsx");
 ```
