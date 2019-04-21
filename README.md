@@ -1,5 +1,5 @@
-# ExcelConverter
-[![NuGet version](https://badge.fury.io/nu/RandomSolutions.ExcelConverter.svg)](http://badge.fury.io/nu/RandomSolutions.ExcelConverter)
+# ExcelConverter [![NuGet version](https://badge.fury.io/nu/RandomSolutions.ExcelConverter.svg)](http://badge.fury.io/nu/RandomSolutions.ExcelConverter)
+Convert Excel to C# object
 
 ## Samples
 - [Convert Excel to simple object](Samples/SimpleObject#convert-excel-to-simple-c-object)
