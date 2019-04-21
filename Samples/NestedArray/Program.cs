@@ -37,8 +37,7 @@ namespace NestedArray
                         .Col(x => FindChildCol(x, "prop#2")))
                     .Prop("Prop3", c => c
                         .Col(x => FindChildCol(x, "prop#3"))
-                        .Value(x => x.Value?.ToString().Split(',')))
-                )
+                        .Value(x => x.Value?.ToString().Split(','))))
             , @"sample.xlsx");
 
             foreach (var item in result)
