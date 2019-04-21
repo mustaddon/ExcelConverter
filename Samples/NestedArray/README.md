@@ -60,7 +60,6 @@ var findChildCol = new Func<ExcelConvertContext, string, int>((ctx, title)
             .Col(x => findChildCol(x, "prop#2")))
         .Prop("Prop3", c => c
             .Col(x => findChildCol(x, "prop#3"))
-            .Value(x => x.Value?.ToString().Split(',')))
-    )
+            .Value(x => x.Value?.ToString().Split(','))))
 , @"sample.xlsx");
 ```
