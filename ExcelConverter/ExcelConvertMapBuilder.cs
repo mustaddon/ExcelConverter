@@ -7,15 +7,6 @@ namespace RandomSolutions
 {
     public class ExcelConvertMapBuilder
     {
-        ExcelConvertMap _map = new ExcelConvertMap();
-        public Dictionary<string, ExcelConvertMapBuilder> _props = new Dictionary<string, ExcelConvertMapBuilder>();
-        
-        public ExcelConvertMapBuilder Count(Func<ExcelConvertContext, int> fn)
-        {
-            _map.Count = fn;
-            return this;
-        }
-
         public ExcelConvertMapBuilder Sheet(Func<ExcelConvertContext, int> fn)
         {
             _map.Sheet = fn;
@@ -37,6 +28,12 @@ namespace RandomSolutions
         public ExcelConvertMapBuilder Value(Func<ExcelConvertContext, object> fn)
         {
             _map.Value = fn;
+            return this;
+        }
+
+        public ExcelConvertMapBuilder Count(Func<ExcelConvertContext, int> fn)
+        {
+            _map.Count = fn;
             return this;
         }
 
@@ -62,7 +59,8 @@ namespace RandomSolutions
         public ExcelConvertMap Build()
         {
             _map.Props = !_props.Any() ? null
-                : _props.Select(x => {
+                : _props.Select(x =>
+                {
                     var propMap = x.Value.Build();
                     propMap.Name = x.Key;
                     return propMap;
@@ -70,5 +68,9 @@ namespace RandomSolutions
 
             return _map;
         }
+
+
+        ExcelConvertMap _map = new ExcelConvertMap();
+        Dictionary<string, ExcelConvertMapBuilder> _props = new Dictionary<string, ExcelConvertMapBuilder>();
     }
 }
